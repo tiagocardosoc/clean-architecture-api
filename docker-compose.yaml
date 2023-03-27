@@ -1,0 +1,13 @@
+version: '3'
+services:
+  database:
+    image: 'mongo'
+    container_name: mongo-clean
+    environment:
+      - MONGO_INITDB_DATABASE=admin
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+    volumes:
+      - /src/docker/volumes
+    ports:
+      - '27017:27017'
