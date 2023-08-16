@@ -10,7 +10,6 @@ export class AuthMiddleware {
                 const token = req.headers.authorization.split(" ")[0];
                 const securityService = new SecurityService(authConfig.secret);
                 const decodedToken = securityService.validateJwt(token);
-                console.log('DECODED TOKEN JWT =>', decodedToken)
                 req.body.jwt = decodedToken;
                 next();
             }

@@ -40,8 +40,6 @@ export default class AuthSignInUseCase implements IAuthSingInUseCase {
 
         const { id } = userData;
 
-        console.log(id);
-
         if (encryptedPassword.match(userData.password) && userData) {
             return {
                 id: userData.id,

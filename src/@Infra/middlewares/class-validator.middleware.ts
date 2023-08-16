@@ -12,8 +12,6 @@ export const validateInput = async (req: Request, res: Response, next) => {
             errors: details
         })
     }
-    console.log("validateInput FIRED!!", req.body, details)
-
     next()
 
 }
