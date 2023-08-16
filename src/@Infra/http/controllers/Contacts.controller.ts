@@ -76,7 +76,10 @@ export class ContactsController {
 
     async findAll(req: Request, res: Response) {
         try {
-            const contactUseCaseResponse = await new ContactListAllUseCase(this.contactRepository).execute()
+            const { id } = req.body.jwt;
+            const userId = new mongoose.Types.ObjectId(id)
+
+            const contactUseCaseResponse = await new ContactListAllUseCase(this.contactRepository).execute(userId)
 
             return res.status(200).json({
                 message: 'All contacts found.',

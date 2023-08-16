@@ -1,6 +1,7 @@
 import Contacts from "../models/Contacts.model"
 import { ContactsEntity } from "../../@Domain/entity/ContactsEntity";
 import { IRepo } from "src/@Core/interfaces";
+import mongoose, { ObjectId } from "mongoose";
 
 export class ContactsRepository implements IRepo<ContactsEntity> {
     async create(contactCreateData: ContactsEntity): Promise<ContactsEntity> {
@@ -9,8 +10,12 @@ export class ContactsRepository implements IRepo<ContactsEntity> {
         return new ContactsEntity(document.id, document.name, document.email, document.phoneNumber, document.ownerUserId);
     }
 
-    async findAll(): Promise<ContactsEntity[]> {
-        return await Contacts.find()
+    async findAll(userId: mongoose.Types.ObjectId): Promise<ContactsEntity[]> {
+        return await Contacts.find(
+            {
+                ownerUserId: userId
+            }
+        )
     }
 
     async findOne(where: Partial<ContactsEntity>): Promise<ContactsEntity> {
